@@ -1,0 +1,23 @@
+body {
+  background-color: #ccc787;
+  box-sizing: border-box; }
+
+.Cell {
+  height: 7px;
+  width: 7px;
+  border: 1px solid black;
+  display: inline-block; }
+
+.horizontalDiv {
+  margin: 0;
+  padding: 0;
+  height: 7px; }
+
+.rouge {
+  background-color: rgba(255, 92, 0, 0.98); }
+
+.blanc {
+  background-color: white; }
+
+button {
+  margin-top: 20px; }
