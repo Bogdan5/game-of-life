@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Board from './components/Board.js';
+import Button from './components/Button.js';
 import './App.css';
 
 class App extends Component {
@@ -9,12 +10,22 @@ class App extends Component {
       boardWidth: 5,
       boardHeight: 5,
       board: [],
+      number: 0,
+      start: false,
+      paused: false,
+      reset: false,
+      size: 'small',
+      speed: 'medium',
     };
   }
 
   clicked = (type) => {
     
   }
+
+  setNumber = (num) => {
+    this.setState({ number: num });
+  };
 
   render() {
     return (
@@ -36,7 +47,7 @@ class App extends Component {
           <Button role={'medium'} clicker={this.clicked}/>
           <Button role={'large'} clicker={this.clicked}/>
         </div>
-        <Input />
+        <Input placeholder={'Number live cells'} submitter={this.setNumber}/>
       </div>
     );
   }
