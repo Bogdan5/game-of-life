@@ -37,22 +37,22 @@ class App extends Component {
 
     switch (type) {
       case 'small':
-        this.setState({ boardWidth: 7, boardWidth: 7, });
+        this.setState({ boardWidth: 7, boardWidth: 7, start: false, });
         break;
       case 'medium':
-        this.setState({ boardWidth: 25, boardHeight: 20, });
+        this.setState({ boardWidth: 25, boardHeight: 20, start: false, });
         break;
       case 'large':
-        this.setState({ boardWidth: 50, boardHeight: 20, });
+        this.setState({ boardWidth: 50, boardHeight: 20, start: false, });
         break;
       case 'slow':
-        this.setState({ speed: 1000 });
+        this.setState({ speed: 1000, start: false, });
         break;
       case 'moderate':
-        this.setState({ speed: 600 });
+        this.setState({ speed: 600, start: false, });
         break;
       case 'fast':
-        this.setState({ speed: 300 });
+        this.setState({ speed: 300, start: false, });
         break;
     }
 

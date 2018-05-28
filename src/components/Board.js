@@ -29,20 +29,37 @@ class Board extends Component {
   }
 
   setBoard = () => {
-    console.log('setBoard');
+    let randArr = [];
+    let arr = [];
+    for (let k = 0; k < (this.props.height * this.props.width - 1); k++) {
+      randArr.push({ num: k, val: Math.random(), });
+    }
+
+    randArr.sort((a, b) => {
+      if (a.val > b.val) {return 1;};
+
+      if (a.val < b.val) {return -1;};
+
+      if (a.val === b.val) {return 0;};
+    });
+
+    for (let l = 0; l < this.props.nrAlive; l++) {
+      arr[l] = randArr[l].num;
+    }
+
+    arr.sort((a, b) => a - b);
+    console.log(arr, typeof arr[0]);
     let cellList = [];
-    let index = 1;
-    let aliveRatio = this.props.nrAlive / (this.props.height * this.props.width);
-    let nrAdded = 0;
+    let index = 0;
     for (let i = 0; i < this.props.height; i++) {
       let horizontal = [];
       for (let j = 0; (j < this.props.width); j++) {
-        let rand = Math.random() < aliveRatio;
-        let randomCell = { number: index++,
-          alive: rand && (nrAdded < this.props.nrAlive),
+        let a = (i * this.props.height + j) === arr[index];
+        let randomCell = { number: i * this.props.height + j,
+          alive: a,
           height: i, width: j, };
         horizontal.push(randomCell);
-        rand && nrAdded++;
+        a && index++;
       }
 
       cellList.push(horizontal);
@@ -58,7 +75,6 @@ class Board extends Component {
       if (this.state.reset) {
         console.log('clearing');
         clearInterval(start);
-        // this.setBoard();
       }
 
       if (this.state.endgame) {
