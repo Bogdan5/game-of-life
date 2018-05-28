@@ -13,13 +13,13 @@ class Button extends Component {
   }
 
   clicker = () => {
-    this.props.clicker(this.props.role);
-  }
+    this.props.clicker(this.props.purp);
+  };
 
   render() {
     let cellClass = classNames('Cell', this.props.alive ? 'rouge' : 'blanc');
     return (
-      <button className={cellClass} onClick={this.clicker}></button>
+      <button className="Button" onClick={this.clicker}>{this.props.purp}</button>
     );
   }
 }

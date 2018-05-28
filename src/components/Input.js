@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from './Button.js';
 import classNames from 'classnames';
 import '../App.css';
 
@@ -12,15 +13,14 @@ class Input extends Component {
 
   getNumber = (e) => {
     let num = e.target.value;
-    num = (typeof num === 'number') ? Math.ceil(num) : 0;
-    this.setState({ number: num });
+    this.setState({ number: parseInt(num) });
   };
 
   render() {
     return (
       <div className="Input">
         <input type="text" placeholder={this.props.placeholder} onChange={this.getNumber}></input>
-        <Button role="submit" onClick={this.submitter}/>
+        <Button purp="submit" clicker={this.submitter}/>
       </div>
     );
   }

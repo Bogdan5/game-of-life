@@ -6,11 +6,9 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      boardWidth: this.props.width,
-      boardHeight: this.props.height,
       board: [],
-      paused: false,
       reset: false,
+      endgame: false,
     };
   }
 
@@ -18,14 +16,33 @@ class Board extends Component {
     this.setBoard();
   }
 
+  componentDidUpdate(prevProps) {
+    !prevProps.start && this.props.start && this.startAnimation();
+    if ((!prevProps.reset && this.props.reset) || ((prevProps.height !== this.props.height ||
+      prevProps.width !== this.props.width) || (prevProps.speed !== this.props.speed))
+    || (prevProps.nrAlive !== this.props.nrAlive)) {
+      console.log('changed');
+      this.setState({ reset: true });
+      this.setBoard();
+    }
+
+  }
+
   setBoard = () => {
+    console.log('setBoard');
     let cellList = [];
     let index = 1;
-    for (let i = 0; i < this.state.boardHeight; i++) {
+    let aliveRatio = this.props.nrAlive / (this.props.height * this.props.width);
+    let nrAdded = 0;
+    for (let i = 0; i < this.props.height; i++) {
       let horizontal = [];
-      for (let j = 0; j < this.state.boardWidth; j++) {
-        let randomCell = { number: index++, alive: Math.random() < 0.5, height: i, width: j, };
+      for (let j = 0; (j < this.props.width); j++) {
+        let rand = Math.random() < aliveRatio;
+        let randomCell = { number: index++,
+          alive: rand && (nrAdded < this.props.nrAlive),
+          height: i, width: j, };
         horizontal.push(randomCell);
+        rand && nrAdded++;
       }
 
       cellList.push(horizontal);
@@ -35,14 +52,21 @@ class Board extends Component {
   };
 
   startAnimation = () => {
-    this.setState({ paused: false, reset: false, });
+    console.log('start animation');
+    this.setState({ reset: false, endgame: false, });
     const start = setInterval(() => {
-      if (this.props.reset) {
+      if (this.state.reset) {
+        console.log('clearing');
         clearInterval(start);
-        this.setBoard();
+        // this.setBoard();
       }
 
-      !this.state.paused && this.oneTick();
+      if (this.state.endgame) {
+        clearInterval(start);
+        this.setState({ endgame: false });
+      }
+
+      !this.props.paused && !this.state.reset && this.oneTick();
     }, this.props.speed);
   };
 
@@ -54,13 +78,13 @@ class Board extends Component {
         if (i !== 0 || j !== 0) {
           let h = i + height;
           let w = j + width;
-          if (h === this.state.boardHeight) {h = 0;}
+          if (h === this.props.height) {h = 0;}
 
-          if (h < 0) {h = this.state.boardHeight - 1;}
+          if (h < 0) {h = this.props.height - 1;}
 
-          if (w === this.state.boardWidth) {w = 0;}
+          if (w === this.props.width) {w = 0;}
 
-          if (w < 0) {w = this.state.boardWidth - 1;}
+          if (w < 0) {w = this.props.width - 1;}
 
           board[h][w].alive && number++;
         }
@@ -71,7 +95,10 @@ class Board extends Component {
   };
 
   oneTick = () => {
+    console.log('starting tick');
     let newBoard = [];
+    let endgame = true;
+    let changeMade = false;
     this.state.board.forEach((item, index) => {
       let horizontal = [];
       item.forEach((cell, ind) => {
@@ -79,25 +106,21 @@ class Board extends Component {
         let newCell = Object.assign({}, cell);
         if (cell.alive && (numNeighbours < 2 || numNeighbours > 3)) {
           newCell.alive = false;
+          changeMade = true;
         } else if (!cell.alive && numNeighbours === 3) {
           newCell.alive = true;
+          changeMade = true;
         }
 
         horizontal.push(newCell);
+        if (endgame && cell.alive) { endgame = false;}
       });
       newBoard.push(horizontal);
     });
+
+    // console.log('______________');
+    (endgame || !changeMade) && this.setState({ endgame: true });
     this.setState({ board: newBoard });
-  };
-
-  pause = () => {
-    this.setState({ paused: !this.state.paused });
-  };
-
-  reset = () => {
-    this.setState({ reset: true });
-    this.setBoard();
-    this.setState({ reset: false });
   };
 
   render() {
@@ -109,9 +132,6 @@ class Board extends Component {
           </div>
           )
         }
-        <button onClick={this.startAnimation}>Start</button>
-        <button onClick={this.pause}>Pause</button>
-        <button onClick={this.reset}>Reset</button>
       </div>
     );
   }
