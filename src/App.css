@@ -1,6 +1,11 @@
 body {
-  background-color: #ccc787;
+  background-color: #999966;
   box-sizing: border-box; }
+
+.Board {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px; }
 
 .Cell {
   height: 7px;
@@ -19,5 +24,33 @@ body {
 .blanc {
   background-color: white; }
 
-button {
-  margin-top: 20px; }
+.Button {
+  width: 75px;
+  height: 30px;
+  border: 0px;
+  box-shadow: 3px 3px 3px grey;
+  background-color: black;
+  color: white;
+  border-radius: 5px; }
+  .Button:hover, .Button :active {
+    background-color: #262626;
+    color: grey; }
+
+.inputNr {
+  margin-left: 20px;
+  width: 170px;
+  height: 30px;
+  border-radius: 5px;
+  border: 0px;
+  margin-right: 20px; }
+
+.buttonGroup {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  width: 35%;
+  display: flex;
+  justify-content: space-around; }
+
+.Label {
+  width: 150px; }

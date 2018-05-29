@@ -1,8 +1,14 @@
-$yellow-dark:rgb(204, 199, 135);
+$grey:rgb(153, 153, 102);
 
 body{
-  background-color: $yellow-dark;
+  background-color: $grey;
   box-sizing: border-box;
+}
+
+.Board{
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .Cell{
@@ -26,6 +32,38 @@ body{
   background-color: white;
 }
 
-button{
-  margin-top: 20px;
+.Button{
+  width: 75px;
+  height: 30px;
+  border: 0px;
+  box-shadow: 3px 3px 3px grey;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  &:hover, :active{
+    background-color: lighten(black, 15%);
+    color: grey;
+  }
+}
+
+.inputNr{
+  margin-left: 20px;
+  width: 170px;
+  height: 30px;
+  border-radius: 5px;
+  border: 0px;
+  margin-right: 20px;
+}
+
+.buttonGroup{
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  width: 35%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Label{
+  width: 150px;
 }

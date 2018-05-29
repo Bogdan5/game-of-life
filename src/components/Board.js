@@ -35,20 +35,12 @@ class Board extends Component {
       randArr.push({ num: k, val: Math.random(), });
     }
 
-    randArr.sort((a, b) => {
-      if (a.val > b.val) {return 1;};
-
-      if (a.val < b.val) {return -1;};
-
-      if (a.val === b.val) {return 0;};
-    });
-
+    randArr.sort((a, b) => (a.val - b.val));
     for (let l = 0; l < this.props.nrAlive; l++) {
       arr[l] = randArr[l].num;
     }
 
     arr.sort((a, b) => a - b);
-    console.log(arr, typeof arr[0]);
     let cellList = [];
     let index = 0;
     for (let i = 0; i < this.props.height; i++) {
@@ -134,14 +126,13 @@ class Board extends Component {
       newBoard.push(horizontal);
     });
 
-    // console.log('______________');
     (endgame || !changeMade) && this.setState({ endgame: true });
     this.setState({ board: newBoard });
   };
 
   render() {
     return (
-      <div className="App">
+      <div className="Board">
         {this.state.board.map((item) =>
           <div className="horizontalDiv">
             {item.map((cel) => <Cell key={cel.number} alive={cel.alive}/>)}

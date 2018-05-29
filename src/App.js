@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Board from './components/Board.js';
 import Button from './components/Button.js';
 import Input from './components/Input.js';
+import Label from './components/Label.js';
 import './App.css';
 
 class App extends Component {
@@ -70,22 +71,27 @@ class App extends Component {
         <Board height={this.state.boardHeight} width={this.state.boardWidth}
         speed={this.state.speed} aliveStart={this.state.number} nrAlive={this.state.number}
         start={this.state.start} reset={this.state.reset} paused={this.state.paused}/>
-        <div>
+        <div className="buttonGroup">
+          <Label content="Game controls"/>
           <Button purp={'start'} clicker={this.clicked}/>
           <Button purp={'paused'} clicker={this.clicked}/>
           <Button purp={'reset'} clicker={this.clicked}/>
         </div>
-        <div>
+        <div className="buttonGroup">
+          <Label content="Game speed"/>
           <Button purp={'slow'} clicker={this.clicked}/>
           <Button purp={'moderate'} clicker={this.clicked}/>
           <Button purp={'fast'} clicker={this.clicked}/>
         </div>
-        <div>
+        <div className="buttonGroup">
+          <Label content="Board size"/>
           <Button purp={'small'} clicker={this.clicked}/>
           <Button purp={'medium'} clicker={this.clicked}/>
           <Button purp={'large'} clicker={this.clicked}/>
         </div>
-        <Input placeholder={'Number live cells'} submitter={this.setNumber}/>
+        <div className="buttonGroup">
+          <Input placeholder={'Number live cells'} submitter={this.setNumber}/>
+        </div>
       </div>
     );
   }

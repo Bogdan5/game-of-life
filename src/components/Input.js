@@ -19,7 +19,8 @@ class Input extends Component {
   render() {
     return (
       <div className="Input">
-        <input type="text" placeholder={this.props.placeholder} onChange={this.getNumber}></input>
+        <input type="text" className="inputNr" placeholder={this.props.placeholder}
+          onChange={this.getNumber}></input>
         <Button purp="submit" clicker={this.submitter}/>
       </div>
     );

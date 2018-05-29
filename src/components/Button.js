@@ -17,7 +17,6 @@ class Button extends Component {
   };
 
   render() {
-    let cellClass = classNames('Cell', this.props.alive ? 'rouge' : 'blanc');
     return (
       <button className="Button" onClick={this.clicker}>{this.props.purp}</button>
     );
