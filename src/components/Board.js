@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Cell from './Cell.js';
+import classNames from 'classnames';
 import '../App.css';
 
 class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: [],
-      reset: false,
-      endgame: false,
+      board: [],//array represeting the board
+      reset: false,//true if board reset
+      endgame: false,//true if game ended
     };
   }
 
@@ -16,19 +17,22 @@ class Board extends Component {
     this.setBoard();
   }
 
+  //sets the board when dimensions or speed changed or board reset and starts animation
   componentDidUpdate(prevProps) {
     !prevProps.start && this.props.start && this.startAnimation();
     if ((!prevProps.reset && this.props.reset) || ((prevProps.height !== this.props.height ||
       prevProps.width !== this.props.width) || (prevProps.speed !== this.props.speed))
     || (prevProps.nrAlive !== this.props.nrAlive)) {
-      console.log('changed');
       this.setState({ reset: true });
       this.setBoard();
     }
 
   }
 
+  //sets the board
   setBoard = () => {
+    //in order to create a determinate number of random positions and array of
+    //numbers is created, sorted, and the required number is chosen
     let randArr = [];
     let arr = [];
     for (let k = 0; k < (this.props.height * this.props.width - 1); k++) {
@@ -45,8 +49,8 @@ class Board extends Component {
     let index = 0;
     for (let i = 0; i < this.props.height; i++) {
       let horizontal = [];
-      for (let j = 0; (j < this.props.width); j++) {
-        let a = (i * this.props.height + j) === arr[index];
+      for (let j = 0; j < this.props.width; j++) {
+        let a = (i * this.props.width + j) === arr[index];
         let randomCell = { number: i * this.props.height + j,
           alive: a,
           height: i, width: j, };
@@ -61,11 +65,9 @@ class Board extends Component {
   };
 
   startAnimation = () => {
-    console.log('start animation');
     this.setState({ reset: false, endgame: false, });
     const start = setInterval(() => {
       if (this.state.reset) {
-        console.log('clearing');
         clearInterval(start);
       }
 
@@ -103,7 +105,6 @@ class Board extends Component {
   };
 
   oneTick = () => {
-    console.log('starting tick');
     let newBoard = [];
     let endgame = true;
     let changeMade = false;
@@ -131,10 +132,13 @@ class Board extends Component {
   };
 
   render() {
+    let boardClass = classNames({ ['Board-' + this.props.boardSize]: true, Board: true, });
+    let horizClass = classNames({ ['horizontalDiv-' + this.props.boardSize]: true,
+      horizontalDiv: true, });
     return (
-      <div className="Board">
-        {this.state.board.map((item) =>
-          <div className="horizontalDiv">
+      <div className={boardClass}>
+        {this.state.board.map((item, index) =>
+          <div key={index} className={horizClass}>
             {item.map((cel) => <Cell key={cel.number} alive={cel.alive}/>)}
           </div>
           )

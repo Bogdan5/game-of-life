@@ -6,14 +6,24 @@ body{
 }
 
 .Board{
-  height: 222px;
-  width: 372px;
   border: 10px solid white;
   border-radius: 5px;
   padding: 0px;
   outline: 3px solid grey;
   margin-top: 20px;
-  margin-left:15%;
+  margin-left:30px;
+  &-Small{
+    height: 62px;
+    width: 79px;
+  }
+  &-Medium{
+    height: 152px;
+    width: 239px;
+  }
+  &-Large{
+    height: 222px;
+    width: 372px;
+  }
 }
 
 .Cell{
@@ -26,11 +36,18 @@ body{
 }
 
 .horizontalDiv{
-  width: 373px;
-  height: 150px;
   margin:0 7px;
   padding:0;
   height: 7px;
+  &-Small{
+    width: 63px;
+  }
+  &-Medium{
+    width: 233px;
+  }
+  &-Large{
+    width: 373px;
+  }
 }
 
 .rouge {
@@ -62,9 +79,11 @@ body{
   border-radius: 5px;
   border: 0px;
   margin-right: 20px;
+  padding-left: 5px;
 }
 
 .buttonGroup{
+  margin: 10px 30px;
   border: 1px solid white;
   border-radius: 5px;
   padding: 5px;

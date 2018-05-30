@@ -3,14 +3,21 @@ body {
   box-sizing: border-box; }
 
 .Board {
-  height: 222px;
-  width: 372px;
   border: 10px solid white;
   border-radius: 5px;
   padding: 0px;
   outline: 3px solid grey;
   margin-top: 20px;
-  margin-left: 15%; }
+  margin-left: 30px; }
+  .Board-Small {
+    height: 62px;
+    width: 79px; }
+  .Board-Medium {
+    height: 152px;
+    width: 239px; }
+  .Board-Large {
+    height: 222px;
+    width: 372px; }
 
 .Cell {
   height: 7px;
@@ -21,11 +28,15 @@ body {
   margin: 0; }
 
 .horizontalDiv {
-  width: 373px;
-  height: 150px;
   margin: 0 7px;
   padding: 0;
   height: 7px; }
+  .horizontalDiv-Small {
+    width: 63px; }
+  .horizontalDiv-Medium {
+    width: 233px; }
+  .horizontalDiv-Large {
+    width: 373px; }
 
 .rouge {
   background-color: rgba(255, 92, 0, 0.98); }
@@ -51,9 +62,11 @@ body {
   height: 30px;
   border-radius: 5px;
   border: 0px;
-  margin-right: 20px; }
+  margin-right: 20px;
+  padding-left: 5px; }
 
 .buttonGroup {
+  margin: 10px 30px;
   border: 1px solid white;
   border-radius: 5px;
   padding: 5px;

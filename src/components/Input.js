@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import Button from './Button.js';
-import classNames from 'classnames';
 import '../App.css';
 
+//contains the input field with number of alive cell and a submit Button
 class Input extends Component {
   constructor(props) {
     super(props);
     this.state = { number: 0 };
   }
 
+  //transmits the number to App
   submitter = () => this.props.submitter(this.state.number);
 
+  //reads the number in the input
   getNumber = (e) => {
     let num = e.target.value;
     this.setState({ number: parseInt(num) });

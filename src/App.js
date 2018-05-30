@@ -9,18 +9,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      boardWidth: 40,
-      boardHeight: 30,
-      board: [],
-      number: 12,
-      start: false,
-      paused: false,
-      reset: false,
-      speed: 600,
-      boardSize: 'Small',
+      boardWidth: 7,//board dimensins
+      boardHeight: 7,
+      board: [],//array representing board
+      number: 12, //number of alive cells
+      start: false, //true if game started
+      paused: false,//true if game paused
+      reset: false,//true if game reset
+      speed: 600,//speed of game
+      boardSize: 'Small',//type of board size
     };
   }
 
+  //this method transmits the type of button pressed from Button
   clicked = (type) => {
     if (type === 'Start') {
       this.setState({ start: true, paused: false, reset: false, });
@@ -53,6 +54,7 @@ class App extends Component {
     }
   };
 
+  //transmits from Input the number of alive cells
   setNumber = (num) => {
     this.setState({ number: num || Math.floor(this.state.boardWidth * this.boardWidth / 2),
       start: false, });
@@ -62,6 +64,7 @@ class App extends Component {
     return (
       <div className="App">
         <Board height={this.state.boardHeight} width={this.state.boardWidth}
+          boardSize={this.state.boardSize}
         speed={this.state.speed} aliveStart={this.state.number} nrAlive={this.state.number}
         start={this.state.start} reset={this.state.reset} paused={this.state.paused}/>
         <div className="buttonGroup">
